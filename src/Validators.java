@@ -43,7 +43,7 @@ public class Validators {
     */
     public boolean isPresent(JTextComponent c, String fieldName) {
         if (c.getText().isEmpty()) {
-            showErrorDialog(fieldName + " is a required field.");
+            showErrorDialog("Don't forget to " + fieldName);
             c.requestFocusInWindow();
             return false;
         } else {
@@ -61,39 +61,15 @@ public class Validators {
     public boolean isValidGuess(JTextComponent c, String fieldName){
         try {
             int validGuess = Integer.parseInt(c.getText());
-            if(validGuess > 0 && validGuess <3){
+            if(validGuess >= 1 && validGuess <= 10){
                 return true;
             } else {
-                showErrorDialog(fieldName + " must be an integer.");
+                showErrorDialog("Your " + fieldName + " must be between 1 & 10");
                 c.requestFocusInWindow();
                 return false;
             }
         } catch (NumberFormatException e) {
-            showErrorDialog(fieldName + " must be an integer.");
-            c.requestFocusInWindow();
-            return false;
-        }
-    }
-    
-    /**
-     * This method accepts text field contents and specifies where
-     * the error occurs
-     * @param c text field contents
-     * @param fieldName location where the user went wrong
-     * @return boolean
-    */
-    public boolean isValidWager(JTextComponent c, String fieldName){
-        try {
-            double validWager = Double.parseDouble(c.getText());
-            if(validWager > 0 && validWager <100){
-                return true;
-            } else {
-                showErrorDialog(fieldName + " out of range.");
-                c.requestFocusInWindow();
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            showErrorDialog(fieldName + " must be an double.");
+            showErrorDialog("Your " + fieldName + " must be between 1 & 10");
             c.requestFocusInWindow();
             return false;
         }

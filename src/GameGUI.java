@@ -3,9 +3,18 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * 
+ * 
  * @author Jon/nvpraz0r
  * @version 0.4
- * --------------------
+ * 
+ * 
+ * 
+ * TO DO:
+ * -flush out guessButtonClicked
+ * 
+ * 
+ * 
  */
 
 
@@ -66,7 +75,7 @@ public class GameGUI extends JFrame{
         panel.setLayout(new GridBagLayout());
         panel.add(new JLabel("Guesses Remaining:"), getConstraints(0, 0));
         panel.add(guessesRemainingField, getConstraints(1, 0));
-        panel.add(new JLabel("Player Guess:"), getConstraints(0, 1));
+        panel.add(new JLabel("Guess (1 - 10):"), getConstraints(0, 1));
         panel.add(playerGuessField, getConstraints(1, 1));
         
         //action listeners for buttons
@@ -105,22 +114,13 @@ public class GameGUI extends JFrame{
         setVisible(true);
         setSize(400, 280);
     }
-    
-    public void setUpGame(){
-        //set random number
-        Random rand = new Random();
-        target = rand.nextInt(10) + 1;
-
-        guessesRemainingField.setText("5");
-    }
-
 
     /**
      * This method validates input
      */
     private void guessButtonClicked(){
-        Validators v = new Validators(this);
-        if(v.isValidWager(playerGuessField, "Wager") && v.isValidGuess(guessesRemainingField, "Invalid Guess")){
+        Validators validGuess = new Validators(this);
+        if(validGuess.isPresent(playerGuessField, "guess") && validGuess.isValidGuess(playerGuessField, "guess")){
             //put code here
         }
     }
@@ -138,6 +138,18 @@ public class GameGUI extends JFrame{
      */
     private void exitButtonClicked() {
         System.exit(0);
+    }
+
+    /**
+     * This method resets key variables and text fields
+    */
+    public void setUpGame(){
+        //set random number
+        Random rand = new Random();
+        target = rand.nextInt(10) + 1;
+
+        guessesRemainingField.setText("5");
+        playerGuessField.setText("");
     }
     
     // Helper method to return GridBagConstraints objects
