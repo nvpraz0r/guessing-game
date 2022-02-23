@@ -1,13 +1,13 @@
-/**
- * @author Jon
- * 12/11/2021
- * Application 2: create an application that 
- * populates the combo box in the GUI display
- * from the player database
- */
 import java.util.Random;
 import javax.swing.*;
 import java.awt.*;
+
+/**
+ * @author Jon/nvpraz0r
+ * @version 0.4
+ * --------------------
+ */
+
 
 /**
  * This class implements the UI for the game
@@ -15,9 +15,9 @@ import java.awt.*;
 public class GameGUI extends JFrame{
     
     //private variables
-    private JComboBox playersComboBox;
-    private JTextField wagerAmount;
-    private JTextField playerGuess;
+    public int target;
+    private JTextField playerGuessField;
+    private JTextField guessesRemainingField;
     
     /**
      * This method sets the look and feel
@@ -39,45 +39,45 @@ public class GameGUI extends JFrame{
     private void initComponents(){
         
         //set title
-        setTitle("Application 2");
+        setTitle("Guess The Number");
         setLocationByPlatform(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        playersComboBox = new JComboBox();
-        wagerAmount = new JTextField();
-        playerGuess = new JTextField();
+        playerGuessField = new JTextField();
+        guessesRemainingField = new JTextField();
+
+        guessesRemainingField.setEnabled(false);
 
         //set text field dimensions
         Dimension dim = new Dimension(150, 20);
+
         //set preferred sizes
-        wagerAmount.setPreferredSize(dim);
-        playerGuess.setPreferredSize(dim);
-        playersComboBox.setPreferredSize(dim);
+        playerGuessField.setPreferredSize(dim);
+        guessesRemainingField.setPreferredSize(dim);
+
         //set minimum sizes
-        wagerAmount.setMinimumSize(dim);
-        playerGuess.setMinimumSize(dim);
-        playersComboBox.setMinimumSize(dim);
+        playerGuessField.setMinimumSize(dim);
+        guessesRemainingField.setMinimumSize(dim);
         
         //declare JPanel
         JPanel panel = new JPanel();
+
         //set panels
         panel.setLayout(new GridBagLayout());
-        panel.add(new JLabel("Players:"), getConstraints(0, 0));
-        panel.add(playersComboBox, getConstraints(1, 0));
-        panel.add(new JLabel("Wager Amount (0 - 100):"), getConstraints(0, 1));
-        panel.add(wagerAmount, getConstraints(1, 1));
-        panel.add(new JLabel("Guess a number between 0 and 3:"), getConstraints(0, 2));
-        panel.add(playerGuess, getConstraints(1, 2));
+        panel.add(new JLabel("Guesses Remaining:"), getConstraints(0, 0));
+        panel.add(guessesRemainingField, getConstraints(1, 0));
+        panel.add(new JLabel("Player Guess:"), getConstraints(0, 1));
+        panel.add(playerGuessField, getConstraints(1, 1));
         
         //action listeners for buttons
-        JButton spinTheWheelButton = new JButton("Spin The Wheel");
-        spinTheWheelButton.addActionListener(e -> {
-            spinTheWheelClicked();
+        JButton guessButton = new JButton("Guess");
+        guessButton.addActionListener(e -> {
+            guessButtonClicked();
         });
 
-        JButton clearFieldsButton = new JButton("Clear Fields");
-        clearFieldsButton.addActionListener(e -> {
-            clearFieldsButtonClicked();
+        JButton resetGameVariables = new JButton("Concede");
+        resetGameVariables.addActionListener(e -> {
+            resetGameVariablesClicked();
         });
 
         JButton exitButton = new JButton("Exit");
@@ -87,8 +87,8 @@ public class GameGUI extends JFrame{
         
         //add button elements to buttonPanel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        buttonPanel.add(spinTheWheelButton);
-        buttonPanel.add(clearFieldsButton);
+        buttonPanel.add(guessButton);
+        buttonPanel.add(resetGameVariables);
         buttonPanel.add(exitButton);
 
         //add combobox and textfields to panel
@@ -100,37 +100,37 @@ public class GameGUI extends JFrame{
         //add panel to the window
         add(panel, BorderLayout.CENTER);
 
+        setUpGame();
+
         setVisible(true);
         setSize(400, 280);
     }
     
+    public void setUpGame(){
+        //set random number
+        Random rand = new Random();
+        target = rand.nextInt(10) + 1;
+
+        guessesRemainingField.setText("5");
+    }
+
+
     /**
      * This method validates input
      */
-    private void spinTheWheelClicked(){
+    private void guessButtonClicked(){
         Validators v = new Validators(this);
-        if(v.isValidWager(wagerAmount, "Wager") &&
-            v.isValidGuess(playerGuess, "Invalid Guess")){
-                Random r = new Random();
-                int randomInt = 0;
-                randomInt = r.nextInt(3);
-                String convertPlayerGuess = playerGuess.getText();
-                int parsePlayerGuess = Integer.parseInt(convertPlayerGuess);
-                if (parsePlayerGuess == randomInt){
-                    //add amount gambled
-                } else {
-                    //lose amount gambled
-                }
-            }
+        if(v.isValidWager(playerGuessField, "Wager") && v.isValidGuess(guessesRemainingField, "Invalid Guess")){
+            //put code here
+        }
     }
     
     /**
      * This method clears
      * the text fields and ComboBox
      */
-    private void clearFieldsButtonClicked() {
-        wagerAmount.setText("");
-        playerGuess.setText("");
+    private void resetGameVariablesClicked() {
+        setUpGame();
     }
     
     /**

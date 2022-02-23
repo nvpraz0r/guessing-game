@@ -1,14 +1,13 @@
-/**
- * @author Jon
- * 12/11/2021
- * Application 2: create an application that 
- * populates the combo box in the GUI display
- * from the player database
- */
-
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.text.JTextComponent;
+
+/**
+ * @author Jon/nvpraz0r
+ * @version 0.4
+ * --------------------
+ */
+
 
 /**
  *  This class validates text field input
