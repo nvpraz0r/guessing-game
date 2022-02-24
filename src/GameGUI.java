@@ -109,6 +109,7 @@ public class GameGUI extends JFrame{
         //add panel to the window
         add(panel, BorderLayout.CENTER);
 
+        //initial game variable setup
         setUpGame();
 
         setVisible(true);
@@ -120,8 +121,26 @@ public class GameGUI extends JFrame{
      */
     private void guessButtonClicked(){
         Validators validGuess = new Validators(this);
+        int playerGuess = Integer.parseInt(playerGuessField.getText());
+        int guessesRemaining = Integer.parseInt(guessesRemainingField.getText());
+
         if(validGuess.isPresent(playerGuessField, "guess") && validGuess.isValidGuess(playerGuessField, "guess")){
-            //put code here
+            if(guessesRemaining == 0){
+                //exit until better system
+                System.exit(0);
+            } else {
+                if(playerGuess != target){
+                    //decrement guesses remaining
+                    guessesRemaining--;
+                    //parse and set remaining guesses to applicable field
+                    guessesRemainingField.setText(Integer.toString(guessesRemaining));
+                } else if(playerGuess == target){
+                    //win
+                    //call setUpGame
+                } else{
+                    //dunno maybe throw an error??
+                }
+            }
         }
     }
     

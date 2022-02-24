@@ -40,6 +40,7 @@ public class Validators {
      * the error occurs
      * @param c text field contents
      * @param fieldName location where the user went wrong
+     * @return boolean
     */
     public boolean isPresent(JTextComponent c, String fieldName) {
         if (c.getText().isEmpty()) {
