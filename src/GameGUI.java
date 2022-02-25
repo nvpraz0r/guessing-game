@@ -120,6 +120,7 @@ public class GameGUI extends JFrame{
      * This method validates input
      */
     private void guessButtonClicked(){
+        //
         Validators validGuess = new Validators(this);
         int playerGuess = Integer.parseInt(playerGuessField.getText());
         int guessesRemaining = Integer.parseInt(guessesRemainingField.getText());
