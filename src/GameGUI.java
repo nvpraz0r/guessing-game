@@ -11,20 +11,24 @@ import java.awt.*;
  * 
  * 
  * TO DO:
- * -flush out guessButtonClicked
- * 
- * 
- * 
+ * -create score field
+ * -create two score variables
+ *      -one for overall
+ *      -one for number of guesses
+ * -create method to calculate amount of current round score
+ *      -send guessesRemaining to calculate score
+ * -create "error message" to congratulate player
  */
-
 
 /**
  * This class implements the UI for the game
  */
 public class GameGUI extends JFrame{
     
-    //private variables
+    //class variables
     public int target;
+    private int score;
+    private JTextField playerScoreField;
     private JTextField playerGuessField;
     private JTextField guessesRemainingField;
     
@@ -52,31 +56,37 @@ public class GameGUI extends JFrame{
         setLocationByPlatform(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        playerGuessField = new JTextField();
+        playerScoreField = new JTextField();
         guessesRemainingField = new JTextField();
+        playerGuessField = new JTextField();
 
+        playerScoreField.setEnabled(false);
         guessesRemainingField.setEnabled(false);
 
         //set text field dimensions
         Dimension dim = new Dimension(150, 20);
 
         //set preferred sizes
-        playerGuessField.setPreferredSize(dim);
+        playerScoreField.setPreferredSize(dim);
         guessesRemainingField.setPreferredSize(dim);
+        playerGuessField.setPreferredSize(dim);
 
         //set minimum sizes
-        playerGuessField.setMinimumSize(dim);
+        playerScoreField.setMinimumSize(dim);
         guessesRemainingField.setMinimumSize(dim);
+        playerGuessField.setMinimumSize(dim);
         
         //declare JPanel
         JPanel panel = new JPanel();
 
         //set panels
         panel.setLayout(new GridBagLayout());
-        panel.add(new JLabel("Guesses Remaining:"), getConstraints(0, 0));
-        panel.add(guessesRemainingField, getConstraints(1, 0));
-        panel.add(new JLabel("Guess (1 - 10):"), getConstraints(0, 1));
-        panel.add(playerGuessField, getConstraints(1, 1));
+        panel.add(new JLabel("Score:"), getConstraints(0, 0));
+        panel.add(playerScoreField, getConstraints(1, 0));
+        panel.add(new JLabel("Guesses Remaining:"), getConstraints(0, 1));
+        panel.add(guessesRemainingField, getConstraints(1, 1));
+        panel.add(new JLabel("Guess (1 - 10):"), getConstraints(0, 2));
+        panel.add(playerGuessField, getConstraints(1, 2));
         
         //action listeners for buttons
         JButton guessButton = new JButton("Guess");
@@ -110,6 +120,7 @@ public class GameGUI extends JFrame{
         add(panel, BorderLayout.CENTER);
 
         //initial game variable setup
+        playerScoreField.setText("0");
         setUpGame();
 
         setVisible(true);
@@ -137,7 +148,10 @@ public class GameGUI extends JFrame{
                     guessesRemainingField.setText(Integer.toString(guessesRemaining));
                 } else if(playerGuess == target){
                     //win
+                    //call getScore
+                    getScore(guessesRemaining);
                     //call setUpGame
+                    setUpGame();
                 } else{
                     //dunno maybe throw an error??
                 }
@@ -160,6 +174,10 @@ public class GameGUI extends JFrame{
         System.exit(0);
     }
 
+    private int getScore(int guessesRemaining){
+        return 0;
+    }
+
     /**
      * This method resets key variables and text fields
     */
@@ -168,6 +186,7 @@ public class GameGUI extends JFrame{
         Random rand = new Random();
         target = rand.nextInt(10) + 1;
 
+        //set game variables
         guessesRemainingField.setText("5");
         playerGuessField.setText("");
     }
