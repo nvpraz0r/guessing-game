@@ -96,6 +96,7 @@ public class GameGUI extends JFrame{
 
         JButton resetGameVariables = new JButton("Concede");
         resetGameVariables.addActionListener(e -> {
+            score -= 10;
             resetGameVariablesClicked();
         });
 
@@ -128,23 +129,30 @@ public class GameGUI extends JFrame{
     }
 
     /**
-     * This method validates input
+     * This method validates input and
+     * controls primary game functionality
      */
     private void guessButtonClicked(){
-        //
+        //instantiate validation object
         Validators validGuess = new Validators(this);
+        //declare primary game variables
         int guessesRemaining;
         int playerGuess;
 
+        //validate input
         if(validGuess.isPresent(playerGuessField, "guess") && validGuess.isValidGuess(playerGuessField, "guess")){
 
+            //assign primary game variables with new data
             playerGuess = Integer.parseInt(playerGuessField.getText());
             guessesRemaining = Integer.parseInt(guessesRemainingField.getText());
-            
+
+            //check guesses remaining
             if(guessesRemaining == 0){
                 //exit for now
                 System.exit(0);
             } else {
+
+                //check if input matches target
                 if(playerGuess != target){
                     //decrement guesses remaining
                     guessesRemaining--;
@@ -178,8 +186,36 @@ public class GameGUI extends JFrame{
         System.exit(0);
     }
 
-    private int getScore(int guessesRemaining){
-        return 0;
+    /**
+     * This method calculates the amount of points awarded
+     * to the player based on the number of guesses remaining
+     * in the round via switch case
+     * @param guessesRemaining
+     * @return none
+    */
+    private void getScore(int guessesRemaining){
+        //switch statement to calculate points based on number of attempts to guess target
+        switch(guessesRemaining){
+            case 1:
+                score += 2;
+                break;
+            case 2:
+                score += 4;
+                break;
+            case 3:
+                score += 6;
+                break;
+            case 4:
+                score += 8;
+                break;
+            case 5:
+                score += 10;
+                break;
+            default:
+                break;
+        }
+        //update score displayed on UI
+        playerScoreField.setText(Integer.toString(score));
     }
 
     /**
@@ -191,8 +227,13 @@ public class GameGUI extends JFrame{
         target = rand.nextInt(10) + 1;
 
         //set game variables
+        playerScoreField.setText(Integer.toString(score));
         guessesRemainingField.setText("5");
         playerGuessField.setText("");
+
+        //REMOVE THIS
+        System.out.println(target); //printing target to test scoring
+        //REMOVE THIS
     }
     
     // Helper method to return GridBagConstraints objects
