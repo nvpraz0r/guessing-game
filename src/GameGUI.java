@@ -133,10 +133,14 @@ public class GameGUI extends JFrame{
     private void guessButtonClicked(){
         //
         Validators validGuess = new Validators(this);
-        int guessesRemaining = Integer.parseInt(guessesRemainingField.getText());
-        int playerGuess = Integer.parseInt(playerGuessField.getText().trim());
+        int guessesRemaining;
+        int playerGuess;
 
         if(validGuess.isPresent(playerGuessField, "guess") && validGuess.isValidGuess(playerGuessField, "guess")){
+
+            playerGuess = Integer.parseInt(playerGuessField.getText());
+            guessesRemaining = Integer.parseInt(guessesRemainingField.getText());
+            
             if(guessesRemaining == 0){
                 //exit for now
                 System.exit(0);
