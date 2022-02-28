@@ -133,12 +133,12 @@ public class GameGUI extends JFrame{
     private void guessButtonClicked(){
         //
         Validators validGuess = new Validators(this);
-        int playerGuess = Integer.parseInt(playerGuessField.getText());
         int guessesRemaining = Integer.parseInt(guessesRemainingField.getText());
+        int playerGuess = Integer.parseInt(playerGuessField.getText().trim());
 
         if(validGuess.isPresent(playerGuessField, "guess") && validGuess.isValidGuess(playerGuessField, "guess")){
             if(guessesRemaining == 0){
-                //exit until better system
+                //exit for now
                 System.exit(0);
             } else {
                 if(playerGuess != target){
