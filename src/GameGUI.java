@@ -11,12 +11,6 @@ import java.awt.*;
  * 
  * 
  * TO DO:
- * -create score field
- * -create two score variables
- *      -one for overall
- *      -one for number of guesses
- * -create method to calculate amount of current round score
- *      -send guessesRemaining to calculate score
  * -create "error message" to congratulate player
  */
 
