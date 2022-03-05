@@ -75,4 +75,11 @@ public class Validators {
             return false;
         }
     }
+
+    /**
+     * method name subject to change
+    */
+    public void winMessage(){
+        showErrorDialog("Congratulations you won!");
+    }
 }

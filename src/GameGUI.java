@@ -153,7 +153,8 @@ public class GameGUI extends JFrame{
                     //parse and set remaining guesses to applicable field
                     guessesRemainingField.setText(Integer.toString(guessesRemaining));
                 } else if(playerGuess == target){
-                    //win
+                    //call winMessage
+                    validGuess.winMessage();
                     //call getScore
                     getScore(guessesRemaining);
                     //call setUpGame
