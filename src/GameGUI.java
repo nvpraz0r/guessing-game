@@ -3,15 +3,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * 
- * 
  * @author Jon/nvpraz0r
- * @version 0.4
- * 
- * 
+ * @version 1.0
  * 
  * TO DO:
- * -create "error message" to congratulate player
+ *  -rework UI
  */
 
 /**

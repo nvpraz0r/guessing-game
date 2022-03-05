@@ -4,8 +4,10 @@ import javax.swing.text.JTextComponent;
 
 /**
  * @author Jon/nvpraz0r
- * @version 0.4
- * --------------------
+ * @version 1.0
+ * 
+ * TO DO:
+ *  -rework UI
  */
 
 
